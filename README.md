@@ -7,31 +7,18 @@ Seating Chart Generator is a suite of programs for creating class seating charts
 
 It requires [Processing 3](processing.org) to compile, along with the `ControlP5` library. Additionally, the contents of the `libraries` folder should be combined with Processing's libraries folder.
 
-4 programs are included:
-- ClassCreator is used to create lists of students.
+To use the Seating Chart Generator you must also have a PDF reader and Excel, or an equivalent.
+
+3 programs are included:
 - DeskLayout is used to arrange desks
 - SeatingChartCreator is used to assign constraints to students and generate seating charts.
 - ChartPrinter is used to create printable PDFs from the seating charts.
 
-## ClassCreator
-ClassCreator is used to create `.scclass` files (student lists). You can create lists manually, load them from Excel files, or do a combination of both. The SeatingChartGenerator program can only read .scclass files - not Excel files - so ClassCreator can be used as a converter for Excel files to work with the program.
+## Creating Classes
 
-### Creating Student Lists Manually
-To create a new student, click the `+ STUDENT` button next to the student list. A new student will appear with the label `(N)`. The `N` represents No Gender, and will change to an `M` or `F` depending on what gender you select. You can then type in a first name, middle name, last name, and select a gender. Make sure that you press Enter in each of the text boxes to apply your changes. It is also important that you click the `+ STUDENT` button before entering student information.
+Lists of students are created using Excel, or an equivalent software. Make a copy of the included `Student List Template.xls` file, and fill out a row for each student. It is important that the file stays in `.xls` format and not `.xlsx`.
 
-All you need for a student to be valid is a first name. The program currently does nothing with the gender information, or the separation of names into 3 parts. However, the extra information could become useful in the future.
-
-Click any student in the list to select it. The student's information will appear to the right. You can then edit the information, again making sure to press Enter in each text box to apply your changes.
-
-Click the `SAVE` button at the top of the window to save the student list to a file. The `.scclass` extension will automatically be appended to the file name. Click `LOAD` to load a .scclass file you have previously created. Click `CLEAR` to clear the student list, the equivalent of starting a new document. When closing the program, it will not warn you if you haven’t saved your changes!
-
-### Loading Student Lists from Excel Files
-You can load lists of students from an Excel file. The file should have a `.xls` extension, not `xlsx,` so you may have to save your files in a different format.
-Click the `LOAD EXCEL` button at the top of the window to open the file dialog. Once you have chosen the file, the `Load from Excel file` window will appear. Make sure there is not a Load from Excel window already open when you do this.
-
-Once you have chosen your Excel file, you can select the options for how it should read it. Choose the cell you would like it to start reading at, and the direction you would like it to read. Click `OK` to start reading. As explained in the dialog, it will keep reading cells until it encounters a blank one. The text in each cell will be put in the First Name section of the student - it does not automatically separate names.
-
-The dialog will not close on its own, but if all has gone well the text `FILE READ` will appear in green and the student list in the main window will have some names in it. If there were already students there, the new students will be added on. DO NOT CLOSE THE DIALOG! If you do, there is a bug that causes the entire program to close.
+Only a first name is required for each student. For gender, use `M` for male, `F` for female, and `N` or leave it blank for no specified gender. The program currently does nothing with the gender information; however, the extra information could become useful in the future.
 
 ## DeskLayout
 The DeskLayout program is used to design arrangements of desks. Each square on the grid represents a space for a desk. When you click a square, it will turn light blue, indicating that there is a desk there. Click it again, and it will turn dark blue, indicating that there is an empty space. You can click and drag to place many desks at once. You can draw your desks anywhere on the screen - the grid will be automatically cropped.
@@ -41,9 +28,9 @@ Click `SAVE` to save the current desk arrangement as a `.png` file, readable by 
 ## SeatingChartCreator
 SeatingChartCreator program is used to create / randomize seating charts and design "constraints" for students.
 
-On the left side of the window is the file panel. There is a `LOAD FILE` button at the top, which is used to load classes, desk layouts, constraints, and previously created seating charts. Below that is a menu with options to save constraints or the seating chart, or clear all constraints.
+On the left side of the window is the file panel. There is a `LOAD FILE` button at the top, which is used to load student lists, desk layouts, constraints, and previously created seating charts. Below that is a menu with options to save constraints or the seating chart, or clear all constraints.
 
-When you load a class file, a list of students will appear in the `STUDENTS` list on the right. This list is scrollable with a tiny scrollbar to the right (it is not always obvious that it is scrollable).
+When you load a student list Excel file, a list of students will appear in the `STUDENTS` list on the right. This list is scrollable with a tiny scrollbar to the right (it is not always obvious that it is scrollable).
 
 When you load a desk layout file, the desk arrangement will appear as a group of blue rectangles with Xs in the corners. You need at least a class file and a desk layout file loaded to use most of the functions of the program.
 
