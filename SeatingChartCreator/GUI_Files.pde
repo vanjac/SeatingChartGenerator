@@ -28,8 +28,8 @@ void classFileLoaded(File f) {
   if(f == null)
     return;
   
-  if(!getFileExtension(f.toString()).equals("scclass")) {
-    errorMessage("Please choose a file of type '.scclass'.");
+  if(!getFileExtension(f.toString()).equals("xls")) {
+    errorMessage("Please choose a file of type '.xls'.");
     return;
   }
   

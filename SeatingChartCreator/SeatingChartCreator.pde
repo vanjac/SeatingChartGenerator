@@ -5,32 +5,15 @@ import java.nio.file.*;
 import java.io.*;
 import javax.swing.JOptionPane;
 
-
-//Created Jan. 4
-//Alpha 1 completed Jan. 15
-
-
-/* System requirements
-JRE 7 (or 8?)
-1024 x 768 resolution
-Windows XP (latest service pack)
-OS X 10.7.3
-Linux
-*/
-
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.poifs.filesystem.*;
 
 /* Bugs (for all programs):
 - ConcurrentModificationException issues - can sometimes occur while closing the window(?)
-ClassCreator: no error message when file type is not recognized (class files only)
 - Allows constraint distance to be greater than the size of the room
 Duplicate students can appear?
 Extra desks can appear
-- OK button does not close the Excel dialog
-- OK button in Excel dialog can be hidden (window height is too small)
-Multiple Excel dialogs can be open - causes problems
-Incorrect error if seating chart class file can not be found (error is also hidden behind desks)
 Changing allowed desks not always applied
-Damaged class files
 */
 
 
