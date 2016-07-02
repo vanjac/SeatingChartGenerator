@@ -29,7 +29,6 @@ void setupGUI() {
     .setMode(ControlP5.MULTIPLES)
     .set(0, 0, true)
     .setInterval(0)
-//    .pause()
     ;
   
   setupFilePanel();

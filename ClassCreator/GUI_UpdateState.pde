@@ -100,23 +100,6 @@ void setupExcelDialogGUI() {
     return;
   }
   
-  /*btnCancel = cp5.addButton("Cancel")
-    .setPosition(0, frame.height - 56)
-    .setSize(64, 24)
-    ;
-  frame.addEvent(btnCancel, new CP5EventAction() {
-    public void run(ControlEvent e) {
-      //frame.setupExternalMessages();
-      //frame.stop();
-      //frame.destroy();
-      //frame.exit();
-      //frame.draw();
-      frame.dispose();
-      frame.setVisible(false);
-      frame.draw();
-    }
-  });*/
-  
   lblFile = cp5.addTextlabel("File")
     .setText("File: ")
     .setPosition(4, 4)
@@ -125,16 +108,6 @@ void setupExcelDialogGUI() {
   
   if(selectedExcelFile != null)
     lblFile.setText("File: " + selectedExcelFile.getName().toString());
-    
-  /*btnChooseFile = cp5.addButton("Browse...")
-    .setPosition(frame.width - 80, 4)
-    .setSize(64, 24)
-    ;
-  frame.addEvent(btnChooseFile, new CP5EventAction() {
-    public void run(ControlEvent e){
-      selectInput("Select an Excel file to read:", "excelFileLoaded");
-    }
-  });*/
   
   cp5.addTextlabel("Cell")
     .setText("Cell to start at:")

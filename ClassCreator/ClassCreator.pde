@@ -2,8 +2,6 @@ import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.poifs.filesystem.*;
 import java.io.FileInputStream;
 import java.util.*;
-//import java.awt.Frame;
-//import java.awt.BorderLayout;
 
 import controlP5.*;
 
@@ -42,7 +40,3 @@ void pre() {
 PApplet applet() {
   return this;
 }
-
-//static void main(String[] args) {
-//  
-//}

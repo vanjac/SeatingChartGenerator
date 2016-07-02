@@ -5,7 +5,7 @@ interface DeskFileReader {
 final float brightnessThreshold = 127;
 
 class GenericDeskFileReader implements DeskFileReader {
-  boolean[][] read(String file) {
+  public boolean[][] read(String file) {
     println("Reading desk file " + file);
     
     PImage deskImage = loadImage(file);
@@ -22,10 +22,8 @@ class GenericDeskFileReader implements DeskFileReader {
       for(int x = 0; x < deskImage.width; x++) {
         color c = deskImage.get(x, y);
         if(brightness(c) <= brightnessThreshold) {
-          print("*");
           desks[x][y] = true;
         } else {
-          print(" ");
           desks[x][y] = false;
         }
       }
