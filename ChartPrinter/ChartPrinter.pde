@@ -5,7 +5,6 @@ import java.util.*;
 import java.nio.file.*;
 import javax.swing.JOptionPane;
 
-
 PGraphicsPDF pdf;
 
 int deskSize = 64;
@@ -22,14 +21,12 @@ final int titleFontSize = 48;
 final int textOffsetX = 8;
 final int textOffsetY = 16;
 
-String[] strings;
 String saveFileName;
 
 boolean fileLoaded = false;
 boolean recording = false;
 boolean firstDraw = true;
 boolean drawDesks = false;
-boolean promptMessage = false;
 
 SeatingArrangement arrangement = null;
 
@@ -53,8 +50,6 @@ void loadFileChosen(File f) {
   }
   
   chartFile = f.toPath();
-  String[] s = loadStrings(f.toString());
-  strings = s;
   
   selectOutput("Choose a file to save to", "saveFileChosen");
 }
@@ -71,7 +66,6 @@ void saveFileChosen(File f) {
     saveFileName = saveFileName + ".pdf";
   
   fileLoaded = true;
-  promptMessage = true;
   
   drawDesks();
 }
@@ -96,12 +90,6 @@ void draw() {
     fill(color(0));
     text("Choose file to save to...", 4, 4, width, 64);
     return;
-  }
-  
-  if(promptMessage) {
-    textFont(titleFont, titleFontSize);
-    fill(0);
-    text("Type a title (enter to save)", 6, 4, width - 8, 64);
   }
   
   if(drawDesks) {
@@ -191,7 +179,6 @@ void doneMessage() {
 
 
 void keyPressed() {
-  promptMessage = false;
   drawDesks();
 }
 

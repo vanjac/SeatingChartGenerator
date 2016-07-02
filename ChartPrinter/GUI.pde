@@ -20,7 +20,7 @@ void setupGUI() {
     .setPosition(4, 4)
     .setSize(width - 8, 56)
     .setLabel("")
-    //.setText("Type a title (enter to save)")
+    .setText("Title")
     .setFont(titleFont)
     .setColorCursor(color(0))
     .setAutoClear(true)
