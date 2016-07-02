@@ -4,22 +4,12 @@ void genericFileOpen(File f) {
   
   String extension = getFileExtension(f.toString());
   
-  if(extension.equals("scclass")) {
+  if(extension.equals("xls")) {
     classFileLoaded(f);
     return;
   }
   
-  if(extension.equals("scchart")) {
-    seatingFileLoaded(f);
-    return;
-  }
-  
-  if(extension.equals("scconst")) {
-    constraintFileLoaded(f);
-    return;
-  }
-  
-  if(extension.equals("png") || extension.equals("jpg") || extension.equals("tga") || extension.equals("gif")) {
+  if(extension.equals("png") || extension.equals("gif") || extension.equals("bmp")) {
     deskFileLoaded(f);
     return;
   }
@@ -118,43 +108,6 @@ void seatingFileSaved(File f) {
 }
 
 
-void seatingFileLoaded(File f) {
-  if(f == null)
-    return;
-  
-  if(!getFileExtension(f.toString()).equals("scchart")) {
-    errorMessage("Please choose a file of type '.scchart'.");
-    return;
-  }
-  
-  //clearAllDesks();
-  SeatingChartFileReader reader = new GenericSeatingChartFileReader();
-  
-  String fileName = reader.readClass(f.toString());
-  if(fileName == null) {
-    errorMessage("Error reading seating file.\nMake sure file is in the correct format.");
-    return;
-  }
-  if(fileName.isEmpty()) {
-    errorMessage("Error reading seating file.\nMake sure file is in the correct format.");
-    return;
-  }
-  readClass(fileName);
-  
-  
-  SeatingArrangement result = reader.read(f.toString(), currentStudentList);
-  if(result == null) {
-    errorMessage("Error reading seating file.\nMake sure file is in the correct format.");
-    return;
-  }
-  
-  currentSeatingChart = result;
-  
-  updateCurrentSeatingChart();
-  updateStudentList();
-}
-
-
 void constraintFileSaved(File f) {
   if(f == null)
     return;
@@ -164,45 +117,6 @@ void constraintFileSaved(File f) {
   if(!result) {
     errorMessage("Error saving constraint file.");
   }
-}
-
-
-void constraintFileLoaded(File f) {
-  if(f == null)
-    return;
-  
-  ConstraintFileReader reader = new GenericConstraintFileReader();
-  
-  String fileName = reader.readClass(f.toString());
-  if(fileName == null) {
-    errorMessage("Error reading constraint file.\nMake sure file is in the correct format.");
-    return;
-  }
-  if(fileName.isEmpty()) {
-    errorMessage("Error reading constraint file.\nMake sure file is in the correct format.");
-    return;
-  }
-  readClass(fileName);
-  
-  
-  SeatingArrangement arrangement = reader.readDesks(f.toString());
-  if(arrangement == null) {
-    errorMessage("Error reading constraint file.\nMake sure file is in the correct format.");
-    return;
-  }
-  
-  currentSeatingChart = arrangement;
-  
-  
-  boolean result = reader.addConstraints(f.toString(), currentStudentList, currentSeatingChart, constraints);
-  if(!result) {
-    errorMessage("Error reading constraint file.\nMake sure file is in the correct format.");
-    return;
-  }
-  
-  
-  updateCurrentSeatingChart();
-  updateStudentList();
 }
 
 
