@@ -39,8 +39,7 @@ void setupConstraints() {
   });
 }
 
-
-class ProximityConstraint implements SeatingConstraint {
+public class ProximityConstraint implements SeatingConstraint {
   int distance;
   boolean mode;
   Student student;
