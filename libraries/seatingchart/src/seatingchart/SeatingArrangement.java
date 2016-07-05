@@ -1,6 +1,8 @@
+package seatingchart;
+
 import java.util.*;
 
-class SeatingArrangement {
+public class SeatingArrangement {
   private int xLen;
   private int yLen;
   private Desk[][] desks;

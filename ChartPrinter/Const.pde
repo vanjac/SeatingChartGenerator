@@ -1,16 +1,6 @@
 List<ConstraintType> constraints;
 
 
-interface SeatingConstraint {
-  public boolean satisfiesConstraint(Desk d);
-  
-  public String toString();
-  
-  public List<ControllerInterface> createGUI(ControlP5 cp5, Group g);
-  
-  public JSONObject createJSON();
-}
-
 interface ConstraintType {
   public String toString();
   public boolean matchesType(SeatingConstraint c);

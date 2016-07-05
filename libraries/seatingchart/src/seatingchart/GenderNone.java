@@ -1,4 +1,6 @@
-class GenderNone implements Gender {
+package seatingchart;
+
+public class GenderNone implements Gender {
   public String toString() {
     return "none";
   }

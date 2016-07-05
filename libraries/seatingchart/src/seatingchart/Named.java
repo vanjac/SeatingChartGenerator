@@ -1,4 +1,6 @@
-interface Named {
+package seatingchart;
+
+public interface Named {
   public String getFirstName();
   public String getMiddleName();
   public String getLastName();

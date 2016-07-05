@@ -1,4 +1,6 @@
-class Desk {
+package seatingchart;
+
+public class Desk {
   private SeatingArrangement arrangement;
   private int x;
   private int y;

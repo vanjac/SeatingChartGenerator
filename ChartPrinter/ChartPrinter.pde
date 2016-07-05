@@ -1,3 +1,5 @@
+import seatingchart.*;
+
 import controlP5.*;
 import processing.pdf.*;
 

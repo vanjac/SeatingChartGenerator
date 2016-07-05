@@ -1,6 +1,8 @@
+package seatingchart;
+
 import java.util.*;
 
-class ClassGroup {
+public class ClassGroup {
   private List<Student> students;
   
   public ClassGroup() {

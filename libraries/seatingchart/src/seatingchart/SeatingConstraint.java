@@ -1,8 +1,10 @@
+package seatingchart;
+
 import controlP5.*;
 import processing.data.*;
 import java.util.*;
 
-interface SeatingConstraint {
+public interface SeatingConstraint {
   public boolean satisfiesConstraint(Desk d);
   
   public String toString();

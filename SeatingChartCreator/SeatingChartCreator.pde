@@ -1,3 +1,4 @@
+import seatingchart.*;
 import controlP5.*;
 
 import java.util.*;

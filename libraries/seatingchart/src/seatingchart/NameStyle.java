@@ -1,4 +1,6 @@
-enum NameStyle {
+package seatingchart;
+
+public enum NameStyle {
   FIRST, MIDDLE, LAST, FIRST_LAST, FULL, FULL_MIDDLE_INITIAL, INITIALS2, INITIALS3, FIRST_LAST_INITIAL;
   
   public String formatName(String n1, String n2, String n3) {

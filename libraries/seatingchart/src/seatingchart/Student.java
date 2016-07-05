@@ -1,6 +1,8 @@
+package seatingchart;
+
 import java.util.*;
 
-class Student implements Named {
+public class Student implements Named {
   private String firstName;
   private String middleName;
   private String lastName;

@@ -1,4 +1,6 @@
-class GenderFemale implements Gender {
+package seatingchart;
+
+public class GenderFemale implements Gender {
   public String toString() {
     return "female";
   }
