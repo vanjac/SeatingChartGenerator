@@ -1,29 +1,29 @@
-interface DeskFileWriter {
-  public boolean write(String file, boolean[][] desks);
-}
+package seatingchart;
 
-class GenericDeskFileWriter {
-  public boolean write(String file, boolean[][] desks) {
-    println("Writing desk file " + file);
+import processing.core.*;
+
+public class ImageDeskFileWriter implements DeskFileWriter {
+  public boolean write(PApplet applet, String file, boolean[][] desks) {
+    System.out.println("Writing desk file " + file);
     
     int xStart = getXStart(desks);
     int xEnd = getXEnd(desks);
     int yStart = getYStart(desks);
     int yEnd = getYEnd(desks);
     
-    println("Start at: (" + xStart + ", " + yStart + ")");
-    println("End at: (" + xEnd + ", " + yEnd + ")");
+    System.out.println("Start at: (" + xStart + ", " + yStart + ")");
+    System.out.println("End at: (" + xEnd + ", " + yEnd + ")");
     
-    PImage image = createImage(xEnd - xStart, yEnd - yStart, RGB);
+    PImage image = applet.createImage(xEnd - xStart, yEnd - yStart, PApplet.RGB);
     
     for(int y = 0; y < image.height; y++) {
       for(int x = 0; x < image.width; x++) {
-        color c;
+        int c;
         boolean value = desks[xStart + x][yStart + y];
         if(value) {
-          c = color(0);
+          c = applet.color(0);
         } else {
-          c = color(255);
+          c = applet.color(255);
         }
         
         image.set(x, y, c);
@@ -32,7 +32,7 @@ class GenericDeskFileWriter {
     
     image.save(file);
     
-    println("Done writing file");
+    System.out.println("Done writing file");
     return true;
   }
   

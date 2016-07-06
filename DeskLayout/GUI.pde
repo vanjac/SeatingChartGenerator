@@ -80,7 +80,7 @@ void fileLoaded(File f) {
   if(f == null)
     return;
   
-  boolean[][] desks = new GenericDeskFileReader().read(f.toString());
+  boolean[][] desks = new ImageDeskFileReader().read(this, f.toString());
   
   if(desks == null)
     return;
@@ -118,5 +118,5 @@ void fileSaved(File f) {
     println();
   }
   
-  boolean result = new GenericDeskFileWriter().write(fileName, desks);
+  boolean result = new ImageDeskFileWriter().write(this, fileName, desks);
 }
