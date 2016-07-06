@@ -1,5 +1,3 @@
-final int classFileLines = 4;
-
 interface ClassFileReader {
   public ClassGroup read(String file);
 }

@@ -314,7 +314,7 @@ void setupStudentAccordion() {
         return;
       }
       
-      Randomizer r = new GenericRandomizer();
+      Randomizer r = new RecursiveRandomizer();
       SeatingArrangement result = r.randomize(currentSeatingChart, currentStudentList, rdoFillMode.getState(0), rdoFillMode.getState(1));
       if(result == null) {
         println("ERROR: Couldn't be randomized");

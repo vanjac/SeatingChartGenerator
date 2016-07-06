@@ -1,12 +1,5 @@
 List<ConstraintType> constraints;
 
-interface ConstraintType {
-  public String toString();
-  public boolean matchesType(SeatingConstraint c);
-  public SeatingConstraint create();
-  public SeatingConstraint createFromJSON(JSONObject json);
-}
-
 
 void setupConstraints() {
   constraints = new ArrayList<ConstraintType>();
