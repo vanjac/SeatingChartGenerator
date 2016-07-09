@@ -6,7 +6,7 @@ Button btnClear;
 Button btnLoad;
 Button btnSave;
 
-Map<Integer, PVector> deskPositions;
+Textlabel lblNumDesks;
 
 final int xLen = 24;
 final int yLen = 20;
@@ -27,15 +27,15 @@ void setupGUI() {
     .setSize(xLen*deskSize, yLen*deskSize)
     .setGrid(xLen, yLen)
     .setMode(ControlP5.MULTIPLES)
-    .set(0, 0, true)
+    .set(0, 0, true) // set a single square to trigger an event
     .setInterval(0)
     ;
   
-  setupFilePanel();
-}
-
-
-void setupFilePanel() {
+  lblNumDesks = cp5.addTextlabel("NumDesks")
+    .setPosition(0, 36)
+    .setText("0 desks")
+    ;
+  
   btnClear = cp5.addButton("Clear")
     .setPosition(0, 0)
     .setSize(64, 32)
@@ -68,7 +68,17 @@ void setupFilePanel() {
 }
 
 
+void updateGUI() {
+  int numDesks = 0;
+  for(int y = 0; y < yLen; y++)
+    for(int x = 0; x < xLen; x++)
+      if(mtxDesks.get(x, y))
+        numDesks++;
+  lblNumDesks.setText(numDesks + " desks");
+}
 
+
+// called when matrix events occur
 void desks(int x, int y) {
   mtxDesks.pause();
   mtxDesks.clear();
@@ -82,8 +92,13 @@ void fileLoaded(File f) {
   
   boolean[][] desks = new ImageDeskFileReader().read(this, f.toString());
   
-  if(desks == null)
+  if(desks == null) {
+    JOptionPane.showMessageDialog(null,
+      "Error reading desk file. Make sure file is in correct format.",
+      "Error",
+      JOptionPane.ERROR_MESSAGE);
     return;
+  }
   
   mtxDesks.clear();
   for(int y = 0; y < desks[0].length; y++) {
@@ -119,4 +134,9 @@ void fileSaved(File f) {
   }
   
   boolean result = new ImageDeskFileWriter().write(this, fileName, desks);
+  if(!result)
+    JOptionPane.showMessageDialog(null,
+      "Error writing desk file.",
+      "Error",
+      JOptionPane.ERROR_MESSAGE);
 }
