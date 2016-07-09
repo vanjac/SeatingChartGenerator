@@ -2,7 +2,7 @@
 Seating Chart Generator is a suite of programs for creating class seating charts. Features include:
 - Create students lists in Excel or equivalent.
 - Create arbitrary desk layouts, based on the layout of the desks in your room.
-- Generate seating charts manually or have the computer randomize them. Seating charts can be adjusted after they have been generated. They also can be saved or printed.
+- Generate seating charts manually or randomize them. Seating charts can be adjusted after they have been generated. They also can be saved or printed.
 - Create and save "constraints" for students. You can limit the desks that a student is allowed to sit at, and also restrict specific students from sitting too close together.
 
 It requires [Processing 3](processing.org) to compile, along with the `ControlP5` library. Additionally, the contents of the `libraries` folder should be combined with Processing's libraries folder.
