@@ -121,6 +121,8 @@ void draw() {
       "Error reading file: " + e.toString(),
       "Error",
       JOptionPane.ERROR_MESSAGE);
+      exit();
+      return;
     }
     
     calculateDeskSize(arrangement.getXSize(), arrangement.getYSize());
