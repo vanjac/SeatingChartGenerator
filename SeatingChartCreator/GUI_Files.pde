@@ -56,7 +56,7 @@ void deskFileLoaded(File f) {
   if(f == null)
     return;
   
-  SeatingArrangement result = new GenericDeskFileReader().read(f.toString());
+  SeatingArrangement result = new ImageArrangementFileReader().read(this, f.toString());
   if(result == null) {
     errorMessage("Error reading desk file.\nMake sure file is in the correct format\n(should be an image file, such as '.png').");
     return;
