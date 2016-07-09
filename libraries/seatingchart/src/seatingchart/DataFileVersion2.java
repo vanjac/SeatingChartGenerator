@@ -1,24 +1,17 @@
-interface DataFile {
-  public boolean write(ClassGroup classGroup, SeatingArrangement arrangement, boolean writeConstraintData, boolean writeSeatingData) throws IOException; //If classGroup is null, won't write student data. If arrangement is null, won't write desk data
-  
-  public double getFileVersion();
-  
-  public boolean hasStudentData();
-  public boolean hasConstraintData();
-  public boolean hasDeskData();
-  public boolean hasSeatingData();
-  
-  public ClassGroup readStudents() throws IOException;
-  public SeatingArrangement readDesks() throws IOException;
-  public boolean addStudentsToDesks(ClassGroup classGroup, SeatingArrangement currentArrangement, List<Student> studentList) throws IOException;
-  public boolean addConstraintsToStudents(ClassGroup classGroup, SeatingArrangement arrangement, List<ConstraintType> constraintTypes) throws IOException;
-}
+package seatingchart;
 
+import java.util.*;
+import java.io.IOException;
+import java.nio.file.*;
+import processing.core.*;
+import processing.data.*;
 
-class DataFileVersion2 implements DataFile {
-  private static final float VERSION = 2.0;
-  private static final float VERSION_LOWER = 2.0; //Lowest version number this can read
-  private static final float VERSION_UPPER = 3.0; //Highest version number
+public class DataFileVersion2 implements DataFile {
+  private static final float VERSION = 2.0f;
+  private static final float VERSION_LOWER = 2.0f; //Lowest version number this can read
+  private static final float VERSION_UPPER = 3.0f; //Highest version number
+  
+  private PApplet applet;
   
   private JSONObject json;
   private float thisFileVersion;
@@ -29,8 +22,8 @@ class DataFileVersion2 implements DataFile {
   
   private Path file;
   
-  public DataFileVersion2(Path f) throws IOException {
-    println("Create data file " + f.toString());
+  public DataFileVersion2(PApplet applet, Path f) throws IOException {
+    this.applet = applet;
     file = f;
     
     if(file.toFile().exists()) {
@@ -44,11 +37,24 @@ class DataFileVersion2 implements DataFile {
     }
   }
   
+  private Student findStudent(String fullName, List<Student> studentList) {
+    fullName = fullName.toLowerCase().trim();
+    for(Student s : studentList) {
+      String sName = s.getName(NameStyle.FULL);
+      sName = sName.toLowerCase().trim();
+      if(sName.equals(fullName))
+        return s;
+    }
+    
+    return null;
+  }
+  
+  
   private void loadFile() throws IOException {
-    println("Loading data file...");
+    System.out.println("Loading data file...");
     try {
       //Load the file
-      json = loadJSONObject(file.toString());
+      json = applet.loadJSONObject(file.toString());
       if(json == null) {
         throw new IOException("Could not load " + file.toString() + ".\nMake sure file is in the correct format.");
       }
@@ -184,7 +190,7 @@ class DataFileVersion2 implements DataFile {
       if(deskX != -1 && deskY != -1) {
         Desk d = currentArrangement.getDesk(deskX, deskY);
         if(d == null) {
-          println("Desk not found!");
+          System.out.println("Desk not found!");
           return false;
         }
         
@@ -201,7 +207,7 @@ class DataFileVersion2 implements DataFile {
   public boolean addConstraintsToStudents(ClassGroup classGroup, SeatingArrangement arrangement, List<ConstraintType> constraintTypes) throws IOException {
     JSONArray studentArray = json.getJSONArray("Student");
     if(studentArray == null) {
-      println("No student array!");
+      System.out.println("No student array!");
       return false;
     }
     
@@ -210,7 +216,7 @@ class DataFileVersion2 implements DataFile {
     for(int i = 0; i < studentArray.size(); i++) {
       JSONObject studentObject = studentArray.getJSONObject(i);
       if(!readStudentObject(studentObject, studentList, arrangement, constraintTypes)) {
-        println("Error reading student object!");
+        System.out.println("Error reading student object!");
         return false;
       }
     }
@@ -226,7 +232,7 @@ class DataFileVersion2 implements DataFile {
     String fullName = NameStyle.FULL.formatName(firstName, middleName, lastName);
     Student s = findStudent(fullName, studentList);
     if(s == null) {
-      println("Couldn't find student " + fullName);
+      System.out.println("Couldn't find student " + fullName);
       return false;
     }
     
@@ -235,7 +241,7 @@ class DataFileVersion2 implements DataFile {
       for(int i = 0; i < deskArray.size(); i++) {
         JSONObject deskObject = deskArray.getJSONObject(i);
         if(!readDeskObject(deskObject, s, arrangement)) {
-          println("Error reading desk object!");
+          System.out.println("Error reading desk object!");
           return false;
         }
       }
@@ -246,7 +252,7 @@ class DataFileVersion2 implements DataFile {
       for(int i = 0; i < constraintArray.size(); i++) {
         JSONObject constraintObject= constraintArray.getJSONObject(i);
         if(!readConstraintObject(constraintObject, s, constraints)) {
-          println("Error reading constraint object!");
+          System.out.println("Error reading constraint object!");
           return false;
         }
       }
@@ -261,7 +267,7 @@ class DataFileVersion2 implements DataFile {
     
     Desk d = arrangement.getDesk(x, y);
     if(d == null) {
-      println("No desk at " + x + ", " + y);
+      System.out.println("No desk at " + x + ", " + y);
       return false;
     }
     
@@ -281,13 +287,13 @@ class DataFileVersion2 implements DataFile {
     
     ConstraintType constraintType = findConstraint(type, constraints);
     if(constraintType == null) {
-      println("Couldn't find constraint type " + type);
+      System.out.println("Couldn't find constraint type " + type);
       return false;
     }
     
     SeatingConstraint constraint = constraintType.createFromJSON(constraintObject);
     if(constraint == null) {
-      println("Error creating constraint " + type);
+      System.out.println("Error creating constraint " + type);
       return false;
     }
     student.addConstraint(constraint);
@@ -302,7 +308,7 @@ class DataFileVersion2 implements DataFile {
         return c;
     }
     
-    println("Couldn't find constraint type " + name);
+    System.out.println("Couldn't find constraint type " + name);
     return null;
   }
   
@@ -311,7 +317,7 @@ class DataFileVersion2 implements DataFile {
   
   
   public boolean write(ClassGroup classGroup, SeatingArrangement arrangement, boolean writeConstraintData, boolean writeSeatingData) throws IOException {
-    println("Writing data file...");
+    System.out.println("Writing data file...");
     
     JSONObject json = new JSONObject();
     
@@ -355,7 +361,7 @@ class DataFileVersion2 implements DataFile {
     }
     
     //Save the file
-    saveJSONObject(json, file.toString());
+    applet.saveJSONObject(json, file.toString());
     
     //Update file information by loading it again
     loadFile();

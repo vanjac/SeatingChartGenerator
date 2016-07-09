@@ -111,7 +111,7 @@ void draw() {
     
     try {
       if(arrangement == null) {
-        DataFile file = new DataFileVersion2(chartFile);
+        DataFile file = new DataFileVersion2(this, chartFile);
         ClassGroup classGroup = file.readStudents();
         arrangement = file.readDesks();
         file.addStudentsToDesks(classGroup, arrangement, classGroup.getStudents());

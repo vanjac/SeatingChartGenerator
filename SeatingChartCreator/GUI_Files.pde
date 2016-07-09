@@ -83,7 +83,7 @@ boolean writeDataFile(Path p, boolean writeStudentData, boolean writeConstraintD
   DataFile file;
   
   try {
-    file = new DataFileVersion2(p);
+    file = new DataFileVersion2(this, p);
     return file.write(writeStudentData ? currentClass : null, writeDeskData ? currentSeatingChart : null, writeConstraintData, writeSeatingData);
   } catch (IOException e) {
     errorMessage(e.getMessage());
@@ -125,7 +125,7 @@ void dataFileLoaded(File f) {
     return;
   
   try {
-    DataFile file = new DataFileVersion2(f.toPath());
+    DataFile file = new DataFileVersion2(this, f.toPath());
     
     clearAllDesks();
     
