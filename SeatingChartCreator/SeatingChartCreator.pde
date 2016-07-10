@@ -1,3 +1,7 @@
+// required to load classes for ExcelClassFileReader
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.poifs.filesystem.*;
+
 import seatingchart.*;
 import controlP5.*;
 
@@ -5,9 +9,6 @@ import java.util.*;
 import java.nio.file.*;
 import java.io.*;
 import javax.swing.JOptionPane;
-
-import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.poifs.filesystem.*;
 
 /* Bugs (for all programs):
 - ConcurrentModificationException issues - can sometimes occur while closing the window(?)

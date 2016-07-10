@@ -39,7 +39,7 @@ void classFileLoaded(File f) {
 }
 
 void readClass(String s) {
-  ClassGroup result = new GenericClassFileReader().read(s);
+  ClassGroup result = new ExcelClassFileReader().read(this, s);
   
   if(result == null) {
     errorMessage("Error reading class file.\nMake sure file is in the correct format.");
